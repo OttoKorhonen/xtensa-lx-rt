@@ -1,4 +1,5 @@
 use crate::cfg_asm;
+use core::arch::naked_asm;
 use core::arch::{asm, global_asm};
 
 // we could cfg symbols away and reduce frame size depending on features enabled

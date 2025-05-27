@@ -5,7 +5,7 @@
 #![allow(named_asm_labels)]
 
 use core::arch::asm;
-
+use core::arch::naked_asm;
 pub use r0::{init_data, zero_bss};
 pub use xtensa_lx_rt_proc_macros::{entry, exception, interrupt, pre_init};
 
@@ -129,7 +129,7 @@ extern "C" {
 #[doc(hidden)]
 #[inline]
 unsafe fn set_vecbase(base: *const u32) {
-    asm!("wsr.vecbase {0}", in(reg) base, options(nostack));
+    naked_asm!("wsr.vecbase {0}", in(reg) base, options(nostack));
 }
 
 #[doc(hidden)]
@@ -142,7 +142,7 @@ pub extern "Rust" fn default_mem_hook() -> bool {
 #[macro_export]
 macro_rules! cfg_asm {
     (@inner, [$($x:tt)*], [$($opts:tt)*], ) => {
-        asm!($($x)* $($opts)*)
+        naked_asm!($($x)* $($opts)*)
     };
     (@inner, [$($x:tt)*], [$($opts:tt)*], #[cfg($meta:meta)] $asm:literal, $($rest:tt)*) => {
         #[cfg($meta)]

@@ -62,7 +62,7 @@ extern "C" fn __default_interrupt(_level: u32, _save_frame: &Context) {}
 #[no_mangle]
 #[link_section = ".DebugException.text"]
 unsafe extern "C" fn _DebugExceptionVector() {
-    asm!(
+    naked_asm!(
         "
         wsr a0, EXCSAVE1 // preserve a0
         call0 __naked_debug_exception     // used as long jump
@@ -75,7 +75,7 @@ unsafe extern "C" fn _DebugExceptionVector() {
 #[no_mangle]
 #[link_section = ".NMIException.text"]
 unsafe extern "C" fn _NMIExceptionVector() {
-    asm!(
+    naked_asm!(
         "
         wsr a0, EXCSAVE1 // preserve a0
         call0 __naked_nmi_exception     // used as long jump
@@ -88,7 +88,7 @@ unsafe extern "C" fn _NMIExceptionVector() {
 #[no_mangle]
 #[link_section = ".KernelException.text"]
 unsafe extern "C" fn _KernelExceptionVector() {
-    asm!(
+    naked_asm!(
         "
         wsr a0, EXCSAVE1 // preserve a0
 
@@ -102,7 +102,7 @@ unsafe extern "C" fn _KernelExceptionVector() {
 #[no_mangle]
 #[link_section = ".UserException.text"]
 unsafe extern "C" fn _UserExceptionVector() {
-    asm!(
+    naked_asm!(
         "
         wsr a0, EXCSAVE1 // preserve a0
 
@@ -116,7 +116,7 @@ unsafe extern "C" fn _UserExceptionVector() {
 #[no_mangle]
 #[link_section = ".DoubleException.text"]
 unsafe extern "C" fn _DoubleExceptionVector() {
-    asm!(
+    naked_asm!(
         "
         wsr a0, EXCSAVE1                   // preserve a0 (EXCSAVE1 can be reused as long as there
                                            // is no double exception in the first exception until

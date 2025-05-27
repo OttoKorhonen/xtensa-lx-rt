@@ -57,7 +57,7 @@ global_asm!(
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn save_context() {
-    asm!(
+    naked_asm!(
         "
         s32i    a2,  sp, +XT_STK_A2
         s32i    a3,  sp, +XT_STK_A3
@@ -134,7 +134,7 @@ global_asm!(
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn restore_context() {
-    asm!(
+    naked_asm!(
         "
         l32i    a3,  sp, +XT_STK_SAR
         wsr     a3,  SAR
@@ -192,7 +192,7 @@ global_asm!(
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
@@ -227,7 +227,7 @@ unsafe extern "C" fn __default_naked_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_double_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT double
 
@@ -251,7 +251,7 @@ unsafe extern "C" fn __default_naked_double_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_kernel_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
@@ -277,7 +277,7 @@ unsafe extern "C" fn __default_naked_kernel_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_nmi_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
@@ -302,7 +302,7 @@ unsafe extern "C" fn __default_naked_nmi_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_debug_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
@@ -327,7 +327,7 @@ unsafe extern "C" fn __default_naked_debug_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_alloc_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
