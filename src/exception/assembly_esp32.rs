@@ -476,7 +476,7 @@ global_asm!(
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_exception() {
-    asm!(
+    naked_asm!(
         "
         SAVE_CONTEXT 1
 
@@ -519,7 +519,7 @@ unsafe extern "C" fn __default_naked_exception() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_double_exception() {
-    asm!(
+    naked_asm!(
         "
         mov     a0, a1                     // save a1/sp
         addmi   sp, sp, -XT_STK_FRMSZ      // only allow multiple of 256
@@ -596,7 +596,7 @@ global_asm!(
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_2_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 2", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 2", options(noreturn));
 }
 
 /// Handle Level 3 Interrupt by storing full context and then calling regular function
@@ -607,7 +607,7 @@ unsafe extern "C" fn __default_naked_level_2_interrupt() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_3_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 3", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 3", options(noreturn));
 }
 
 /// Handle Level 4 Interrupt by storing full context and then calling regular function
@@ -618,7 +618,7 @@ unsafe extern "C" fn __default_naked_level_3_interrupt() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_4_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 4", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 4", options(noreturn));
 }
 
 /// Handle Level 5 Interrupt by storing full context and then calling regular function
@@ -629,7 +629,7 @@ unsafe extern "C" fn __default_naked_level_4_interrupt() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_5_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 5", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 5", options(noreturn));
 }
 
 /// Handle Level 6 (=Debug) Interrupt by storing full context and then calling regular function
@@ -640,7 +640,7 @@ unsafe extern "C" fn __default_naked_level_5_interrupt() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_6_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 6", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 6", options(noreturn));
 }
 
 /// Handle Level 7 (=NMI) Interrupt by storing full context and then calling regular function
@@ -651,5 +651,5 @@ unsafe extern "C" fn __default_naked_level_6_interrupt() {
 #[no_mangle]
 #[link_section = ".rwtext"]
 unsafe extern "C" fn __default_naked_level_7_interrupt() {
-    asm!("HANDLE_INTERRUPT_LEVEL 7", options(noreturn));
+    naked_asm!("HANDLE_INTERRUPT_LEVEL 7", options(noreturn));
 }
